@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2>Employee List</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Home Office</th>
+                <th scope="col">Department</th>
+                <th scope="col">Year</th>
+            </tr>
+        </thead>
+        {% for employee in employees %}
+        <tr>
+            <th scope="row">{{ employee.id }}</th>
+            <td>
+                <a class="text-decoration-none" href="{{url_for('employee_detail', id=employee.id)}}">
+                    {{ employee.name }}</td>
+                </a>
+            <td>{{ employee.mail }}</td>
+
+            {% if employee.is_remote %}
+                <td>Home Office</td>
+            {% else %}
+                <td>Office</td>
+            {% endif %}
+
+            <td>{{ employee.department}}</td>
+            <td>{{ employee.year}}</td>
+            <td>
+                <form action="{{ url_for('employee_delete', id=employee.id)}}" method="POST">
+                    <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock %}

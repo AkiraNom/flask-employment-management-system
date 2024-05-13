@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-9">
+            <h2>Employee List</h2>
+        </div>
+        <div class="col-3">
+            <a class="btn btn-outline-primary" href="{{ url_for('employee_edit', id=employee.id) }}" role="button">Edit Data</a>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Home Office</th>
+                <th scope="col">Department</th>
+                <th scope="col">Year</th>
+            </tr>
+        </thead>
+        <tr>
+            <th scope="row">{{ employee.id }}</th>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.mail }}</td>
+
+            {% if employee.is_remote %}
+                <td>Home Office</td>
+            {% else %}
+                <td>Office</td>
+            {% endif %}
+
+            <td>{{ employee.department}}</td>
+            <td>{{ employee.year}}</td>
+        </tr>
+    </table>
+
+</div>
+{% endblock %}
